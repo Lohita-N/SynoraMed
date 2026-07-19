@@ -1,0 +1,211 @@
+@import "tailwindcss";
+
+/*
+  SynoraMed design tokens
+  Clean, calm, medical/health aesthetic: teal + blue accents on soft neutrals.
+*/
+:root {
+  --background: #f4f6f8;
+  --surface: #ffffff;
+  --surface-muted: #f8fafb;
+  --foreground: #1f2933;
+  --muted: #64748b;
+  --border: #e5e9ee;
+
+  --brand: #0d9488;      /* teal */
+  --brand-600: #0f766e;
+  --brand-50: #ecfdf5;
+  --accent: #2563eb;     /* blue */
+  --accent-50: #eff6ff;
+
+  --success: #16a34a;
+  --warning: #d97706;
+  --danger: #e11d48;
+
+  --radius: 16px;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-brand: var(--brand);
+  --color-brand-600: var(--brand-600);
+  --color-brand-50: var(--brand-50);
+  --color-accent: var(--accent);
+  --color-accent-50: var(--accent-50);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Utility: soft card */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04), 0 1px 3px rgba(16, 24, 40, 0.04);
+}
+
+/* Thin scrollbars for the app shell */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: #d3dae1;
+  border-radius: 999px;
+}
+
+/* ---------------- Animations ---------------- */
+
+/* Drifting background blobs */
+@keyframes blob {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(28px, -38px) scale(1.1);
+  }
+  66% {
+    transform: translate(-22px, 20px) scale(0.94);
+  }
+}
+.animate-blob {
+  animation: blob 14s ease-in-out infinite;
+}
+
+/* Staggered entrance */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-up {
+  animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Gentle floating for decorative chips */
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+.animate-float {
+  animation: float-soft 6s ease-in-out infinite;
+}
+
+/* Animated gradient text */
+@keyframes gradient-x {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+.animate-gradient-text {
+  background-size: 200% auto;
+  animation: gradient-x 5s ease infinite;
+}
+
+.animation-delay-1000 {
+  animation-delay: 1s;
+}
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+/* AI "scan line" sweeping down the report card */
+@keyframes scan-down {
+  0% {
+    top: 0%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+.animate-scan {
+  animation: scan-down 3.4s ease-in-out infinite;
+}
+
+/* Annotation callouts popping in */
+@keyframes pop-in {
+  0% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.animate-pop {
+  animation: pop-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Highlighted jargon term pulse */
+@keyframes term-pulse {
+  0%,
+  100% {
+    background-color: color-mix(in srgb, var(--brand) 14%, transparent);
+  }
+  50% {
+    background-color: color-mix(in srgb, var(--brand) 26%, transparent);
+  }
+}
+.animate-term {
+  animation: term-pulse 2.6s ease-in-out infinite;
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-blob,
+  .animate-fade-up,
+  .animate-float,
+  .animate-gradient-text,
+  .animate-scan,
+  .animate-pop,
+  .animate-term {
+    animation: none;
+  }
+}
